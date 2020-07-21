@@ -15,6 +15,148 @@ namespace ServeralControlPrac
         public Form1()
         {
             InitializeComponent();
+
+            CheckBox cb1 = new CheckBox();
+            CheckBox cb2 = new CheckBox();
+            CheckBox cb3 = new CheckBox();
+            Button btn = new Button();
+
+            cb1.Text = "감자";
+            cb2.Text = "고구마";
+            cb3.Text = "토마토";
+            btn.Text = "클릭";
+            btn.Name = "check";
+
+            cb1.Location = new Point(10, 10);
+            cb2.Location = new Point(10, 40);
+            cb3.Location = new Point(10, 70);
+            btn.Location = new Point(10, 100);
+
+            btn.Click += ButtonClick;
+            Controls.Add(cb1);
+            Controls.Add(cb2);
+            Controls.Add(cb3);
+            Controls.Add(btn);
+
+            GroupBox gb1 = new GroupBox();
+            GroupBox gb2 = new GroupBox();
+            gb1.Text = "식물";
+            gb1.Text = "물고기";
+
+            RadioButton rb1 = new RadioButton();
+            RadioButton rb2 = new RadioButton();
+            RadioButton rb3 = new RadioButton();
+            RadioButton rb4 = new RadioButton();
+            RadioButton rb5 = new RadioButton();
+            Button btn2 = new Button();
+            Button btn3 = new Button();
+            rb1.Text = "감자";
+            rb2.Text = "고구마";
+            rb3.Text = "토마토";
+            rb4.Text = "광어";
+            rb5.Text = "우럭";
+            btn2.Text = "식물클릭";
+            btn2.Name = "radio1";
+            btn3.Text = "물고기클릭";
+            btn2.Name = "radio2";
+
+            gb1.Size = new Size(100, 140);
+            gb2.Size = new Size(100, 140);
+            gb1.Location = new Point(140, 10);
+            gb1.Location = new Point(260, 10);
+
+            rb1.Location = new Point(10, 30);
+            rb2.Location = new Point(10, 50);
+            rb3.Location = new Point(10, 90);
+
+            rb4.Location = new Point(10, 30);
+            rb5.Location = new Point(10, 60);
+            
+            btn2.Location = new Point(140, 160);
+            btn2.Click += ButtonClick;
+            btn3.Location = new Point(220, 160);
+            btn3.Click += ButtonClick;
+
+
+            gb1.Controls.Add(rb1);
+            gb1.Controls.Add(rb2);
+            gb1.Controls.Add(rb3);
+            
+            gb2.Controls.Add(rb4);
+            gb2.Controls.Add(rb5);
+
+            Controls.Add(gb1);
+            Controls.Add(gb2);
+            Controls.Add(btn2);
+        }
+
+        private void ButtonClick(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            switch (btn.Name)
+            {
+                case "check":
+                    ShowCheckboxResult();
+                    break;
+                case "radio1":
+                case "radio2":
+                    ShowRadioResult(btn.Name);
+                    break;
+            }
+        }
+
+        private void ShowCheckboxResult()
+        {
+            List<string> list = new List<string>();
+
+            foreach (var item in Controls)
+            {
+                CheckBox cb = item as CheckBox;
+                if (cb != null && cb.Checked)
+                {
+                    list.Add(cb.Text);
+                }
+                /*
+                if(item is CheckBox) // is 타입 확인(as 사용가능)
+                {
+                    CheckBox cb = (CheckBox)item;
+                    if(cb.Checked)
+                    {
+                        list.Add(cb.Text);
+                    }
+                }*/
+            }
+            MessageBox.Show(string.Join(",", list));
+        }
+
+        private void ShowRadioResult(string btnName)
+        {
+            foreach(var item in Controls)
+            {
+                GroupBox gb = item as GroupBox;
+                if(gb != null)
+                {
+                    if(gb.Text == "식물" && btnName == "radio1")
+                    {
+                        foreach(var i in gb.Controls)
+                        {
+                            RadioButton rb = item as RadioButton;
+                            if (rb != null && rb.Checked)
+                            {
+                                MessageBox.Show(rb.Text);
+                            }
+                        }
+                    }
+                }
+
+                
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //System.Diagnostics.Process.Start("https://google.co.kr/");
+            System.Diagnostics.Process.Start("notepad");
         }
     }
 }
