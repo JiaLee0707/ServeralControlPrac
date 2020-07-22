@@ -16,6 +16,11 @@ namespace ServeralControlPrac
         {
             InitializeComponent();
 
+            Label lb1 = new Label();
+            lb1.Text = "레이블입니다";
+            lb1.Location = new Point(140, 200);
+            Controls.Add(lb1);
+
             CheckBox cb1 = new CheckBox();
             CheckBox cb2 = new CheckBox();
             CheckBox cb3 = new CheckBox();
@@ -41,15 +46,17 @@ namespace ServeralControlPrac
             GroupBox gb1 = new GroupBox();
             GroupBox gb2 = new GroupBox();
             gb1.Text = "식물";
-            gb1.Text = "물고기";
+            gb2.Text = "물고기";
 
             RadioButton rb1 = new RadioButton();
             RadioButton rb2 = new RadioButton();
             RadioButton rb3 = new RadioButton();
+
             RadioButton rb4 = new RadioButton();
             RadioButton rb5 = new RadioButton();
             Button btn2 = new Button();
             Button btn3 = new Button();
+
             rb1.Text = "감자";
             rb2.Text = "고구마";
             rb3.Text = "토마토";
@@ -58,12 +65,12 @@ namespace ServeralControlPrac
             btn2.Text = "식물클릭";
             btn2.Name = "radio1";
             btn3.Text = "물고기클릭";
-            btn2.Name = "radio2";
+            btn3.Name = "radio2";
 
-            gb1.Size = new Size(100, 140);
-            gb2.Size = new Size(100, 140);
+            gb1.Size = new Size(110, 140);
+            gb2.Size = new Size(110, 140);
             gb1.Location = new Point(140, 10);
-            gb1.Location = new Point(260, 10);
+            gb2.Location = new Point(260, 10);
 
             rb1.Location = new Point(10, 30);
             rb2.Location = new Point(10, 50);
@@ -74,9 +81,8 @@ namespace ServeralControlPrac
             
             btn2.Location = new Point(140, 160);
             btn2.Click += ButtonClick;
-            btn3.Location = new Point(220, 160);
+            btn3.Location = new Point(260, 160);
             btn3.Click += ButtonClick;
-
 
             gb1.Controls.Add(rb1);
             gb1.Controls.Add(rb2);
@@ -88,6 +94,7 @@ namespace ServeralControlPrac
             Controls.Add(gb1);
             Controls.Add(gb2);
             Controls.Add(btn2);
+            Controls.Add(btn3);
         }
 
         private void ButtonClick(object sender, EventArgs e)
@@ -138,9 +145,20 @@ namespace ServeralControlPrac
                 {
                     if(gb.Text == "식물" && btnName == "radio1")
                     {
-                        foreach(var i in gb.Controls)
+                        foreach (var i in gb.Controls)
                         {
-                            RadioButton rb = item as RadioButton;
+                            RadioButton rb = i as RadioButton;
+                            if (rb != null && rb.Checked)
+                            {
+                                MessageBox.Show(rb.Text);
+                            }
+                        }
+                    } 
+                    else if (gb.Text == "물고기" && btnName == "radio2")
+                    {
+                        foreach (var i in gb.Controls)
+                        {
+                            RadioButton rb = i as RadioButton;
                             if (rb != null && rb.Checked)
                             {
                                 MessageBox.Show(rb.Text);
